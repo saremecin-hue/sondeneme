@@ -1,125 +1,62 @@
-<!DOCTYPE html><html lang="tr">
-<head>
+<!DOCTYPE html><html lang="tr"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eko-Söz</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-      color: #333;
-    }header {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
-  color: white;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.container {
-  max-width: 1000px;
-  margin: 40px auto;
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.home-options {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-.card {
-  flex: 1;
-  padding: 30px;
-  border-radius: 15px;
-  background: #f5f5f5;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.card:hover {
-  background: #4facfe;
-  color: white;
-  transform: translateY(-5px);
-}
-
-.section {
-  display: none;
-}
-
-select, button {
-  padding: 10px;
-  margin: 10px 5px;
-  border-radius: 10px;
-  border: none;
-  font-size: 14px;
-}
-
-button {
-  background: #4facfe;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #00c6ff;
-}
-
-.result {
-  margin-top: 20px;
-  padding: 20px;
-  background: #f9f9f9;
-  border-radius: 10px;
-  line-height: 1.6;
-}
-
-.back-btn {
-  margin-top: 20px;
-  background: #ccc;
-  color: black;
-}
-
+    body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(135deg, #4facfe, #00f2fe); color: #333; }
+    header { text-align: center; padding: 20px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); color: white; font-size: 28px; font-weight: bold; }
+    .container { max-width: 1000px; margin: 40px auto; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+    .home-options { display: flex; gap: 20px; justify-content: center; }
+    .card { flex: 1; padding: 30px; border-radius: 15px; background: #f5f5f5; text-align: center; cursor: pointer; transition: 0.3s; font-size: 18px; font-weight: bold; }
+    .card:hover { background: #4facfe; color: white; transform: translateY(-5px); }
+    .section { display: none; }
+    select, button { padding: 10px; margin: 10px 5px; border-radius: 10px; border: none; font-size: 14px; }
+    button { background: #4facfe; color: white; cursor: pointer; }
+    button:hover { background: #00c6ff; }
+    .result { margin-top: 20px; padding: 20px; background: #f9f9f9; border-radius: 10px; line-height: 1.6; }
+    .back-btn { margin-top: 20px; background: #ccc; color: black; }
+    .sub { font-weight: bold; margin-top: 10px; }
   </style>
 </head>
-<body><header>Eko-Söz</header><div class="container">  <!-- ANA SAYFA -->  <div id="home">
+<body><header>Eko-Söz</header><div class="container">  <div id="home">
     <div class="home-options">
       <div class="card" onclick="openSection('donem')">Dönemine Göre</div>
       <div class="card" onclick="openSection('yazar')">Yazarına Göre</div>
       <div class="card" onclick="openSection('tema')">Temasına Göre</div>
     </div>
-  </div>  <!-- DÖNEM -->  <div id="donem" class="section">
-    <h3> 1. Konuşmacı Dönemini Seçiniz</h3>
-    <select>
-      <option>Divan Edebiyatı</option>
-      <option>Tanzimat</option>
-      <option>Servet-i Fünun</option>
-      <option>Cumhuriyet</option>
-      <option>Geçiş Dönemi</option>
-      <option>İslamiyet Öncesi Türk Edebiyatı</option>
-      <option>Halk Edebiyatı</option>
-      <option>Milli edebiyat</option>
-    </select>
-  <h3> 2. Konuşmacı Dönemini Seçiniz</h3>
-    <select>
-     <option>Divan Edebiyatı</option>
-     <option>Tanzimat</option>
-     <option>Servet-i Fünun</option>
-     <option>Cumhuriyet</option>
-     <option>Geçiş Dönemi</option>
-     <option>İslamiyet Öncesi Türk Edebiyatı</option>
-     <option>Halk Edebiyatı</option>
-     <option>Milli edebiyat</option>
-    </select>
-    <button>Metin Oluştur</button><div class="result">
+  </div>  <!-- DÖNEM -->  <div id="donem" class="section"><h3>1. Konuşmacı Dönemini Seçiniz</h3>
+<select id="donem1" onchange="updateAuthors(1)">
+  <option value="divan">Divan Edebiyatı</option>
+  <option value="tanzimat">Tanzimat</option>
+  <option value="servet">Servet-i Fünun</option>
+  <option value="cumhuriyet">Cumhuriyet</option>
+  <option value="gecis">Geçiş Dönemi</option>
+  <option value="islamiyet">İslamiyet Öncesi</option>
+  <option value="halk">Halk Edebiyatı</option>
+  <option value="milli">Milli Edebiyat</option>
+</select>
+
+<div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
+<select id="yazar1"></select>
+
+<h3>2. Konuşmacı Dönemini Seçiniz</h3>
+<select id="donem2" onchange="updateAuthors(2)">
+  <option value="divan">Divan Edebiyatı</option>
+  <option value="tanzimat">Tanzimat</option>
+  <option value="servet">Servet-i Fünun</option>
+  <option value="cumhuriyet">Cumhuriyet</option>
+  <option value="gecis">Geçiş Dönemi</option>
+  <option value="islamiyet">İslamiyet Öncesi</option>
+  <option value="halk">Halk Edebiyatı</option>
+  <option value="milli">Milli Edebiyat</option>
+</select>
+
+<div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
+<select id="yazar2"></select>
+
+<button>Metin Oluştur</button>
+
+<div class="result">
   <h3>Sonuç</h3>
   <p>Burada metin ve analiz görünecek...</p>
 </div>
@@ -150,10 +87,10 @@ button:hover {
       <option>Vatanseverlik ve Özgürlük</option>
       <option>İnsan ve Toplum Çatışması</option>
       <option>Gelenek ve Modernleşme</option>
-      <option>Kaderve İrade</option>
+      <option>Kader ve İrade</option>
       <option>Yaşam ve Ölüm</option>
       <option>Adalet ve Eşitlik</option>
-      <option>Aşk ve sevgi</option>
+      <option>Aşk ve Sevgi</option>
       <option>Yalnızlık ve İç Hesaplaşma</option>
     </select>
     <button>Metin Oluştur</button><div class="result">
@@ -164,12 +101,37 @@ button:hover {
 <button class="back-btn" onclick="goHome()">Geri</button>
 
   </div></div><script>
+  const authors = {
+    divan: ["Rastgele","Fuzuli","Baki","Nedim"],
+    tanzimat: ["Rastgele","Namık Kemal","Ziya Paşa","Şinasi"],
+    servet: ["Rastgele","Tevfik Fikret","Cenap Şahabettin","Halit Ziya"],
+    cumhuriyet: ["Rastgele","Orhan Veli","Nazım Hikmet","Yaşar Kemal"],
+    gecis: ["Rastgele","Yunus Emre","Hoca Dehhani"],
+    islamiyet: ["Rastgele","Bilge Kağan","Tonyukuk"],
+    halk: ["Rastgele","Karacaoğlan","Aşık Veysel","Dadaloğlu"],
+    milli: ["Rastgele","Ömer Seyfettin","Ziya Gökalp","Yakup Kadri"]
+  };
+
+  function updateAuthors(num) {
+    const donem = document.getElementById("donem"+num).value;
+    const yazarSelect = document.getElementById("yazar"+num);
+
+    yazarSelect.innerHTML = "";
+    authors[donem].forEach(y => {
+      const option = document.createElement("option");
+      option.textContent = y;
+      yazarSelect.appendChild(option);
+    });
+  }
+
+  updateAuthors(1);
+  updateAuthors(2);
+
   function openSection(id) {
     document.getElementById('home').style.display = 'none';
     document.getElementById('donem').style.display = 'none';
     document.getElementById('yazar').style.display = 'none';
     document.getElementById('tema').style.display = 'none';
-
     document.getElementById(id).style.display = 'block';
   }
 
