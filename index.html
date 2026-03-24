@@ -81,21 +81,41 @@
 <button class="back-btn" onclick="goHome()">Geri</button>
 
   </div>  <!-- TEMA -->  <div id="tema" class="section">
-    <h3>Tema Seçiniz</h3>
-    <select>
-      <option>Ahlak ve Vicdan</option>
-      <option>Vatanseverlik ve Özgürlük</option>
-      <option>İnsan ve Toplum Çatışması</option>
-      <option>Gelenek ve Modernleşme</option>
-      <option>Kader ve İrade</option>
-      <option>Yaşam ve Ölüm</option>
-      <option>Adalet ve Eşitlik</option>
-      <option>Aşk ve Sevgi</option>
-      <option>Yalnızlık ve İç Hesaplaşma</option>
-    </select>
-    <button>Metin Oluştur</button><div class="result">
+    <h3>Tema Seçiniz</h3><select id="temaSec">
+  <option value="ahlak">Ahlak ve Vicdan</option>
+  <option value="vatan">Vatanseverlik ve Özgürlük</option>
+  <option value="toplum">İnsan ve Toplum Çatışması</option>
+  <option value="modern">Gelenek ve Modernleşme</option>
+  <option value="kader">Kader ve İrade</option>
+  <option value="yasam">Yaşam ve Ölüm</option>
+  <option value="adalet">Adalet ve Eşitlik</option>
+  <option value="ask">Aşk ve Sevgi</option>
+  <option value="yalnizlik">Yalnızlık ve İç Hesaplaşma</option>
+</select>
+
+<div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
+<select>
+  <option>Rastgele</option>
+  <option>Namık Kemal</option>
+  <option>Tevfik Fikret</option>
+  <option>Orhan Veli</option>
+  <option>Yaşar Kemal</option>
+</select>
+
+<div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
+<select>
+  <option>Rastgele</option>
+  <option>Ahmet Hamdi Tanpınar</option>
+  <option>Nazım Hikmet</option>
+  <option>Ziya Gökalp</option>
+  <option>Yakup Kadri</option>
+</select>
+
+<button>Metin Oluştur</button>
+
+<div class="result">
   <h3>Sonuç</h3>
-  <p>Burada metin ve analiz görünecek...</p>
+  <p>Seçilen tema ve yazarlara göre oluşturulan metin burada görünecek...</p>
 </div>
 
 <button class="back-btn" onclick="goHome()">Geri</button>
