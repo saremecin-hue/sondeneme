@@ -28,21 +28,22 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-.options {
+.home-options {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  gap: 10px;
+  gap: 20px;
+  justify-content: center;
 }
 
 .card {
   flex: 1;
-  padding: 20px;
+  padding: 30px;
   border-radius: 15px;
   background: #f5f5f5;
   text-align: center;
   cursor: pointer;
   transition: 0.3s;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .card:hover {
@@ -51,8 +52,8 @@
   transform: translateY(-5px);
 }
 
-.content {
-  margin-top: 20px;
+.section {
+  display: none;
 }
 
 select, button {
@@ -81,23 +82,36 @@ button:hover {
   line-height: 1.6;
 }
 
+.back-btn {
+  margin-top: 20px;
+  background: #ccc;
+  color: black;
+}
+
   </style>
 </head>
-<body><header>Eko-Söz</header><div class="container">
-  <div class="options">
-    <div class="card" onclick="showSection('donem')">Dönemine Göre</div>
-    <div class="card" onclick="showSection('yazar')">Yazarına Göre</div>
-    <div class="card" onclick="showSection('tema')">Temasına Göre</div>
-  </div>  <div id="donem" class="content" style="display:none;">
-    <h3>Dönem Seç</h3>
+<body><header>Eko-Söz</header><div class="container">  <!-- ANA SAYFA -->  <div id="home">
+    <div class="home-options">
+      <div class="card" onclick="openSection('donem')">Dönemine Göre</div>
+      <div class="card" onclick="openSection('yazar')">Yazarına Göre</div>
+      <div class="card" onclick="openSection('tema')">Temasına Göre</div>
+    </div>
+  </div>  <!-- DÖNEM -->  <div id="donem" class="section">
+    <h3>Dönem Seçiniz</h3>
     <select>
       <option>Divan Edebiyatı</option>
       <option>Tanzimat</option>
       <option>Servet-i Fünun</option>
     </select>
-    <button>Metin Oluştur</button>
-  </div>  <div id="yazar" class="content" style="display:none;">
-    <h3>Yazar Seç</h3>
+    <button>Metin Oluştur</button><div class="result">
+  <h3>Sonuç</h3>
+  <p>Burada metin ve analiz görünecek...</p>
+</div>
+
+<button class="back-btn" onclick="goHome()">Geri</button>
+
+  </div>  <!-- YAZAR -->  <div id="yazar" class="section">
+    <h3>Yazar Seçiniz</h3>
     <select>
       <option>Namık Kemal</option>
       <option>Tevfik Fikret</option>
@@ -106,26 +120,42 @@ button:hover {
       <option>Ahmet Hamdi Tanpınar</option>
       <option>Orhan Veli</option>
     </select>
-    <button>Karşılaştır</button>
-  </div>  <div id="tema" class="content" style="display:none;">
-    <h3>Tema Seç</h3>
+    <button>Karşılaştır</button><div class="result">
+  <h3>Sonuç</h3>
+  <p>Burada karşılaştırma sonucu görünecek...</p>
+</div>
+
+<button class="back-btn" onclick="goHome()">Geri</button>
+
+  </div>  <!-- TEMA -->  <div id="tema" class="section">
+    <h3>Tema Seçiniz</h3>
     <select>
       <option>Aşk</option>
       <option>Özgürlük</option>
       <option>Doğa</option>
     </select>
-    <button>Metin Oluştur</button>
-  </div>  <div class="result">
-    <h3>Sonuç</h3>
-    <p>Burada yapay zeka tarafından oluşturulan metin ve analiz görünecek...</p>
-  </div>
-</div><script>
-  function showSection(sectionId) {
+    <button>Metin Oluştur</button><div class="result">
+  <h3>Sonuç</h3>
+  <p>Burada metin ve analiz görünecek...</p>
+</div>
+
+<button class="back-btn" onclick="goHome()">Geri</button>
+
+  </div></div><script>
+  function openSection(id) {
+    document.getElementById('home').style.display = 'none';
     document.getElementById('donem').style.display = 'none';
     document.getElementById('yazar').style.display = 'none';
     document.getElementById('tema').style.display = 'none';
 
-    document.getElementById(sectionId).style.display = 'block';
+    document.getElementById(id).style.display = 'block';
+  }
+
+  function goHome() {
+    document.getElementById('home').style.display = 'block';
+    document.getElementById('donem').style.display = 'none';
+    document.getElementById('yazar').style.display = 'none';
+    document.getElementById('tema').style.display = 'none';
   }
 </script></body>
 </html>
