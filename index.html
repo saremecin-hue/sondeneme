@@ -1,45 +1,118 @@
-<!DOCTYPE html><html lang="tr"><head>
+<!DOCTYPE html><html lang="tr">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Eko-Söz</title>
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: linear-gradient(135deg, #4facfe, #00f2fe); color: #333; }
-    header { text-align: center; padding: 20px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); color: white; font-size: 28px; font-weight: bold; }
-    .container { max-width: 1000px; margin: 40px auto; background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .home-options { display: flex; gap: 20px; justify-content: center; }
-    .card { flex: 1; padding: 30px; border-radius: 15px; background: #f5f5f5; text-align: center; cursor: pointer; transition: 0.3s; font-size: 18px; font-weight: bold; }
-    .card:hover { background: #4facfe; color: white; transform: translateY(-5px); }
-    .section { display: none; }
-    select, button { padding: 10px; margin: 10px 5px; border-radius: 10px; border: none; font-size: 14px; }
-    button { background: #4facfe; color: white; cursor: pointer; }
-    button:hover { background: #00c6ff; }
-    .result { margin-top: 20px; padding: 20px; background: #f9f9f9; border-radius: 10px; line-height: 1.6; }
-    .back-btn { margin-top: 20px; background: #ccc; color: black; }
-    .sub { font-weight: bold; margin-top: 10px; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .home-options {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap; /* mobilde alt alta geçmesini sağlar */
+    }
+    .card {
+      flex: 1 1 200px;
+      padding: 30px;
+      border-radius: 15px;
+      background: #f5f5f5;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .card:hover {
+      background: #4facfe;
+      color: white;
+      transform: translateY(-5px);
+    }
+    .section {
+      display: none;
+    }
+    select, button {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      width: 100%; /* tam genişlik */
+      box-sizing: border-box;
+    }
+    button {
+      background: #4facfe;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #00c6ff;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      line-height: 1.6;
+    }
+    .back-btn {
+      margin-top: 20px;
+      background: #ccc;
+      color: black;
+    }
+    .sub {
+      font-weight: bold;
+      margin-top: 10px;
+    }@media (max-width: 600px) {
+  header { font-size: 24px; }
+  .card { font-size: 16px; padding: 20px; }
+}
+
   </style>
 </head>
-<body><header>Eko-Söz</header><div class="container">  <div id="home">
+<body><header>Eko-Söz</header>
+<div class="container">  <div id="home">
     <div class="home-options">
       <div class="card" onclick="openSection('donem')">Dönemine Göre</div>
       <div class="card" onclick="openSection('yazar')">Yazarına Göre</div>
       <div class="card" onclick="openSection('tema')">Temasına Göre</div>
     </div>
-  </div>  <!-- DÖNEM -->  <div id="donem" class="section"><h3>1. Konuşmacı Dönemini Seçiniz</h3>
-<select id="donem1" onchange="updateAuthors(1)">
-  <option value="divan">Divan Edebiyatı</option>
-  <option value="tanzimat">Tanzimat</option>
-  <option value="servet">Servet-i Fünun</option>
-  <option value="cumhuriyet">Cumhuriyet</option>
-  <option value="gecis">Geçiş Dönemi</option>
-  <option value="islamiyet">İslamiyet Öncesi</option>
-  <option value="halk">Halk Edebiyatı</option>
-  <option value="milli">Milli Edebiyat</option>
-</select>
-
-<div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
-<select id="yazar1"></select>
-
-<h3>2. Konuşmacı Dönemini Seçiniz</h3>
+  </div>  <!-- DÖNEM -->  <div id="donem" class="section">
+    <h3>1. Konuşmacı Dönemini Seçiniz</h3>
+    <select id="donem1" onchange="updateAuthors(1)">
+      <option value="divan">Divan Edebiyatı</option>
+      <option value="tanzimat">Tanzimat</option>
+      <option value="servet">Servet-i Fünun</option>
+      <option value="cumhuriyet">Cumhuriyet</option>
+      <option value="gecis">Geçiş Dönemi</option>
+      <option value="islamiyet">İslamiyet Öncesi</option>
+      <option value="halk">Halk Edebiyatı</option>
+      <option value="milli">Milli Edebiyat</option>
+    </select>
+    <div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
+    <select id="yazar1"></select><h3>2. Konuşmacı Dönemini Seçiniz</h3>
 <select id="donem2" onchange="updateAuthors(2)">
   <option value="divan">Divan Edebiyatı</option>
   <option value="tanzimat">Tanzimat</option>
@@ -50,7 +123,6 @@
   <option value="halk">Halk Edebiyatı</option>
   <option value="milli">Milli Edebiyat</option>
 </select>
-
 <div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
 <select id="yazar2"></select>
 
@@ -73,53 +145,47 @@
       <option>Ahmet Hamdi Tanpınar</option>
       <option>Orhan Veli</option>
     </select>
-    <button>Karşılaştır</button><div class="result">
-  <h3>Sonuç</h3>
-  <p>Burada karşılaştırma sonucu görünecek...</p>
-</div>
-
-<button class="back-btn" onclick="goHome()">Geri</button>
-
+    <button>Karşılaştır</button>
+    <div class="result">
+      <h3>Sonuç</h3>
+      <p>Burada karşılaştırma sonucu görünecek...</p>
+    </div>
+    <button class="back-btn" onclick="goHome()">Geri</button>
   </div>  <!-- TEMA -->  <div id="tema" class="section">
-    <h3>Tema Seçiniz</h3><select id="temaSec">
-  <option value="ahlak">Ahlak ve Vicdan</option>
-  <option value="vatan">Vatanseverlik ve Özgürlük</option>
-  <option value="toplum">İnsan ve Toplum Çatışması</option>
-  <option value="modern">Gelenek ve Modernleşme</option>
-  <option value="kader">Kader ve İrade</option>
-  <option value="yasam">Yaşam ve Ölüm</option>
-  <option value="adalet">Adalet ve Eşitlik</option>
-  <option value="ask">Aşk ve Sevgi</option>
-  <option value="yalnizlik">Yalnızlık ve İç Hesaplaşma</option>
-</select>
-
-<div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
-<select>
-  <option>Rastgele</option>
-  <option>Namık Kemal</option>
-  <option>Tevfik Fikret</option>
-  <option>Orhan Veli</option>
-  <option>Yaşar Kemal</option>
-</select>
-
-<div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
-<select>
-  <option>Rastgele</option>
-  <option>Ahmet Hamdi Tanpınar</option>
-  <option>Nazım Hikmet</option>
-  <option>Ziya Gökalp</option>
-  <option>Yakup Kadri</option>
-</select>
-
-<button>Metin Oluştur</button>
-
-<div class="result">
-  <h3>Sonuç</h3>
-  <p>Seçilen tema ve yazarlara göre oluşturulan metin burada görünecek...</p>
-</div>
-
-<button class="back-btn" onclick="goHome()">Geri</button>
-
+    <h3>Tema Seçiniz</h3>
+    <select id="temaSec">
+      <option value="ahlak">Ahlak ve Vicdan</option>
+      <option value="vatan">Vatanseverlik ve Özgürlük</option>
+      <option value="toplum">İnsan ve Toplum Çatışması</option>
+      <option value="modern">Gelenek ve Modernleşme</option>
+      <option value="kader">Kader ve İrade</option>
+      <option value="yasam">Yaşam ve Ölüm</option>
+      <option value="adalet">Adalet ve Eşitlik</option>
+      <option value="ask">Aşk ve Sevgi</option>
+      <option value="yalnizlik">Yalnızlık ve İç Hesaplaşma</option>
+    </select>
+    <div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
+    <select>
+      <option>Rastgele</option>
+      <option>Namık Kemal</option>
+      <option>Tevfik Fikret</option>
+      <option>Orhan Veli</option>
+      <option>Yaşar Kemal</option>
+    </select>
+    <div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
+    <select>
+      <option>Rastgele</option>
+      <option>Ahmet Hamdi Tanpınar</option>
+      <option>Nazım Hikmet</option>
+      <option>Ziya Gökalp</option>
+      <option>Yakup Kadri</option>
+    </select>
+    <button>Metin Oluştur</button>
+    <div class="result">
+      <h3>Sonuç</h3>
+      <p>Seçilen tema ve yazarlara göre oluşturulan metin burada görünecek...</p>
+    </div>
+    <button class="back-btn" onclick="goHome()">Geri</button>
   </div></div><script>
   const authors = {
     divan: ["Rastgele","Fuzuli","Baki","Nedim"],
@@ -135,7 +201,6 @@
   function updateAuthors(num) {
     const donem = document.getElementById("donem"+num).value;
     const yazarSelect = document.getElementById("yazar"+num);
-
     yazarSelect.innerHTML = "";
     authors[donem].forEach(y => {
       const option = document.createElement("option");
