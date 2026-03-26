@@ -223,146 +223,113 @@
     <button class="back-btn" onclick="goHome()">Geri</button>
   </div></div><script>
  // 1. Dosyaları tarayan ana fonksiyon
-    async function veriSetleriniTara() {
-      try {
+ // Global Değişkenler: Dosyalardan taranan veriler burada saklanacak
+let globalStyleData = {};
+let globalThemeContent = "";
+let globalEraContent = "";
+
+// 1. ADIM: Sayfa yüklendiğinde tüm veri setlerini tara ve hafızaya al
+async function veriSetleriniYukle() {
+    try {
+        console.log("Veri setleri taranıyor...");
         const [styleRes, themeRes, eraRes] = await Promise.all([
             fetch('/data/style_vectors.json'),
             fetch('/data/yazar_tema_yorumlari (1).txt'),
             fetch('/data/edebi_donemler.txt')
         ]);
 
-        window.styleData = await styleRes.json();
-        window.themeContent = await themeRes.text();
-        window.eraContent = await eraRes.text();
-        console.log("Veri setleri tarandı ve hafızaya alındı.");
+        if (!styleRes.ok || !themeRes.ok || !eraRes.ok) throw new Error("Dosyalardan biri bulunamadı!");
+
+        globalStyleData = await styleRes.json();
+        globalThemeContent = await themeRes.text();
+        globalEraContent = await eraRes.text();
+
+        console.log("Sistem Hazır: 3 veri seti başarıyla tarandı.");
     } catch (err) {
-        console.error("Dosya okuma hatası:", err);
+        console.error("Kritik Hata: Veri setleri yüklenemedi!", err);
     }
 }
 
-// 2. Metin içinde yazarı bulan yardımcı fonksiyon
-function bilgiyiSüz(txt, yazarAdi) {
-    const satirlar = txt.split('\n');
-    let sonuc = "";
-    let kaydet = false;
+// 2. ADIM: TXT dosyası içinden seçilen yazara ait bölümü cımbızla çeken fonksiyon
+function yazarMetniAyikla(tumMetin, yazarAdi) {
+    if (!tumMetin) return "Veri bulunamadı.";
+    
+    const satirlar = tumMetin.split('\n');
+    let bulunanBölüm = "";
+    let kaydetmeyeBasla = false;
+
+    // Yazım hatası toleransı (Tağrık -> Tarık kontrolü)
+    const arananYazar = yazarAdi.replace("Tarık", "Tağrık").toUpperCase();
+    const normalYazar = yazarAdi.toUpperCase();
+
     for (let satir of satirlar) {
-        if (satir.toUpperCase().includes(yazarAdi.toUpperCase())) {
-            kaydet = true;
-        } else if (kaydet && satir.trim().length > 5 && /^[A-ZÇĞİÖŞÜ\s]+$/.test(satir.trim())) {
-            break; 
+        const temizSatir = satir.trim();
+        // Eğer satır yazarın adını içeriyorsa kaydetmeye başla
+        if (temizSatir.includes(normalYazar) || temizSatir.includes(arananYazar)) {
+            kaydetmeyeBasla = true;
+        } 
+        // Eğer kaydetme modundaysak ve yeni bir büyük başlığa geldiysek dur
+        else if (kaydetmeyeBasla && temizSatir.length > 3 && /^[A-ZÇĞİÖŞÜ\s]+$/.test(temizSatir)) {
+            break;
         }
-        if (kaydet) sonuc += satir + "\n";
+
+        if (kaydetmeyeBasla) {
+            bulunanBölüm += satir + "\n";
+        }
     }
-    return sonuc;
+    return bulunanBölüm || `${yazarAdi} için tematik veri bulunamadı.`;
 }
 
-// Sayfa yüklenince taramayı başlat
-window.onload = veriSetleriniTara;
- document.addEventListener("DOMContentLoaded", () => {
+// 3. ADIM: Buton Olay Dinleyicisi
+document.addEventListener("DOMContentLoaded", () => {
+    veriSetleriniYukle(); // Sayfa açılınca taramayı başlat
 
-  const authors = {
-    divan: ["Rastgele"],
-    tanzimat: ["Rastgele","Namık Kemal"],
-    fecri: ["Rastgele","Ahmet Haşim"],
-    servet: ["Rastgele","Halit Ziya Uşaklıgil"],
-    cumhuriyet: ["Rastgele","Ahmet Hamdi Tanpınar","Peyami Safa","Sabahattin Ali"],
-    gecis: ["Rastgele"],
-    islamiyet: ["Rastgele"],
-    halk: ["Rastgele"],
-    milli: ["Rastgele","Ömer Seyfettin"]
-  };
+    const btn = document.getElementById("generateBtn");
+    if (btn) {
+        btn.addEventListener("click", async () => {
+            const y1 = document.getElementById("yazar1").value;
+            const y2 = document.getElementById("yazar2").value;
+            const tema = document.getElementById("temaSec")?.value || "Genel Edebiyat";
+            const resultBox = document.querySelector("#donem .result p");
 
-  function updateAuthors(num) {
-    const donem = document.getElementById("donem" + num).value;
-    const yazarSelect = document.getElementById("yazar" + num);
+            if (resultBox) resultBox.innerText = "Veri setleri taranıyor ve yapay zeka hazırlanıyor... ⏳";
 
-    yazarSelect.innerHTML = "";
+            // Dosyalardan seçilen yazarların verilerini süz
+            const y1_paketi = {
+                uslup: globalStyleData[y1] || globalStyleData["Tağrık Buğra"] || {},
+                tema: yazarMetniAyikla(globalThemeContent, y1)
+            };
 
-    authors[donem].forEach(y => {
-      const option = document.createElement("option");
-      option.textContent = y;
-      yazarSelect.appendChild(option);
-    });
-  }
+            const y2_paketi = {
+                uslup: globalStyleData[y2] || globalStyleData["Tağrık Buğra"] || {},
+                tema: yazarMetniAyikla(globalThemeContent, y2)
+            };
 
-  window.updateAuthors = updateAuthors;
+            try {
+                const res = await fetch("/api/generate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        prompt: `${y1} ve ${y2} arasında "${tema}" üzerine bir diyalog oluştur.`,
+                        y1_analiz: y1_paketi,
+                        y2_analiz: y2_paketi,
+                        donem_verisi: globalEraContent // edebi_donemler.txt içeriği
+                    })
+                });
 
-  updateAuthors(1);
-  updateAuthors(2);
+                const data = await res.json();
 
-  window.openSection = function(id) {
-    document.getElementById('home').style.display = 'none';
-    document.getElementById('donem').style.display = 'none';
-    document.getElementById('yazar').style.display = 'none';
-    document.getElementById('tema').style.display = 'none';
-    document.getElementById(id).style.display = 'block';
-  };
-
-  window.goHome = function() {
-    document.getElementById('home').style.display = 'block';
-    document.getElementById('donem').style.display = 'none';
-    document.getElementById('yazar').style.display = 'none';
-    document.getElementById('tema').style.display = 'none';
-  };
-
-  // 🔥 METİN OLUŞTUR BUTONU
-  const btn = document.getElementById("generateBtn");
-
-  if (btn) {
-    btn.addEventListener("click", async () => {
-
-      console.log("butona basıldı");
-
-     const y1 = document.getElementById("yazar1").value;
-     const y2 = document.getElementById("yazar2").value;
-
-      const resultBox = document.querySelector("#donem .result p");
-      resultBox.innerText = "Metin oluşturuluyor... ⏳";
-
-      const prompt = `
-      ${yazar1} ve ${yazar2} arasında "${tema}" temalı edebi bir diyalog oluştur.
-      400-600 kelime olsun.
-      Sonunda kısa bir karşılaştırma analizi ekle.
-      `;
-
-      try {
-        const res = await fetch("/api/generate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ 
-          prompt: `${y1} ve ${y2} konuşsun.`,
-        y1_analiz: {
-            uslup: window.styleData[y1],
-            tema: bilgiyiSüz(window.themeContent, y1)
-        },
-        y2_analiz: {
-            uslup: window.styleData[y2],
-            tema: bilgiyiSüz(window.themeContent, y2)
-        },
-        donem_bilgisi: window.eraContent
-    })
-          body: JSON.stringify({ prompt })
+                if (data.error) {
+                    resultBox.innerText = "Hata: " + (data.error.message || data.error);
+                } else {
+                    resultBox.innerText = data.choices?.[0]?.message?.content || "Cevap oluşturulamadı.";
+                }
+            } catch (error) {
+                console.error("İstek hatası:", error);
+                resultBox.innerText = "Bağlantı hatası oluştu!";
+            }
         });
-
-        const data = await res.json();
-
-        console.log("API cevabı:", data);
-
-        if (data.error) {
-          resultBox.innerText = "API Hatası: " + data.error;
-          return;
-        }
-
-        resultBox.innerText =
-          data.choices?.[0]?.message?.content || "Boş cevap geldi";
-
-      } catch (err) {
-        resultBox.innerText = "Bağlantı hatası: " + err.message;
-      }
-
-    });
-  }
-
+    }
 });
 </script></body>
 </html>
