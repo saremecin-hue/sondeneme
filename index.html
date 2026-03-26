@@ -222,6 +222,42 @@
     </div>
     <button class="back-btn" onclick="goHome()">Geri</button>
   </div></div><script>
+ // 1. Dosyaları tarayan ana fonksiyon
+    async function veriSetleriniTara() {
+      try {
+        const [styleRes, themeRes, eraRes] = await Promise.all([
+            fetch('/data/style_vectors.json'),
+            fetch('/data/yazar_tema_yorumlari (1).txt'),
+            fetch('/data/edebi_donemler.txt')
+        ]);
+
+        window.styleData = await styleRes.json();
+        window.themeContent = await themeRes.text();
+        window.eraContent = await eraRes.text();
+        console.log("Veri setleri tarandı ve hafızaya alındı.");
+    } catch (err) {
+        console.error("Dosya okuma hatası:", err);
+    }
+}
+
+// 2. Metin içinde yazarı bulan yardımcı fonksiyon
+function bilgiyiSüz(txt, yazarAdi) {
+    const satirlar = txt.split('\n');
+    let sonuc = "";
+    let kaydet = false;
+    for (let satir of satirlar) {
+        if (satir.toUpperCase().includes(yazarAdi.toUpperCase())) {
+            kaydet = true;
+        } else if (kaydet && satir.trim().length > 5 && /^[A-ZÇĞİÖŞÜ\s]+$/.test(satir.trim())) {
+            break; 
+        }
+        if (kaydet) sonuc += satir + "\n";
+    }
+    return sonuc;
+}
+
+// Sayfa yüklenince taramayı başlat
+window.onload = veriSetleriniTara;
  document.addEventListener("DOMContentLoaded", () => {
 
   const authors = {
@@ -277,9 +313,8 @@
 
       console.log("butona basıldı");
 
-      const yazar1 = document.getElementById("yazar1").value;
-      const yazar2 = document.getElementById("yazar2").value;
-      const tema = document.getElementById("temaSec")?.value || "genel";
+     const y1 = document.getElementById("yazar1").value;
+     const y2 = document.getElementById("yazar2").value;
 
       const resultBox = document.querySelector("#donem .result p");
       resultBox.innerText = "Metin oluşturuluyor... ⏳";
@@ -291,12 +326,21 @@
       `;
 
       try {
-
         const res = await fetch("/api/generate", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ 
+          prompt: `${y1} ve ${y2} konuşsun.`,
+        y1_analiz: {
+            uslup: window.styleData[y1],
+            tema: bilgiyiSüz(window.themeContent, y1)
+        },
+        y2_analiz: {
+            uslup: window.styleData[y2],
+            tema: bilgiyiSüz(window.themeContent, y2)
+        },
+        donem_bilgisi: window.eraContent
+    })
           body: JSON.stringify({ prompt })
         });
 
