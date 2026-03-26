@@ -224,12 +224,12 @@
   </div></div><script>
  // 1. Dosyaları tarayan ana fonksiyon
  // Global Değişkenler: Dosyalardan taranan veriler burada saklanacak
-let globalStyleData = {};
-let globalThemeContent = "";
-let globalEraContent = "";
+  let globalStyleData = {};
+  let globalThemeContent = "";
+  let globalEraContent = "";
 
 // 1. ADIM: Sayfa yüklendiğinde tüm veri setlerini tara ve hafızaya al
-async function veriSetleriniYukle() {
+  async function veriSetleriniYukle() {
     try {
         console.log("Veri setleri taranıyor...");
         const [styleRes, themeRes, eraRes] = await Promise.all([
@@ -251,7 +251,7 @@ async function veriSetleriniYukle() {
 }
 
 // 2. ADIM: TXT dosyası içinden seçilen yazara ait bölümü cımbızla çeken fonksiyon
-function yazarMetniAyikla(tumMetin, yazarAdi) {
+  function yazarMetniAyikla(tumMetin, yazarAdi) {
     if (!tumMetin) return "Veri bulunamadı.";
     
     const satirlar = tumMetin.split('\n');
@@ -281,7 +281,7 @@ function yazarMetniAyikla(tumMetin, yazarAdi) {
 }
 
 // 3. ADIM: Buton Olay Dinleyicisi
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     veriSetleriniYukle(); // Sayfa açılınca taramayı başlat
 
     const btn = document.getElementById("generateBtn");
@@ -330,6 +330,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
+  });
 </script></body>
 </html>
