@@ -222,6 +222,26 @@
     </div>
     <button class="back-btn" onclick="goHome()">Geri</button>
   </div></div><script>
+    // Sayfa geçişlerini sağlayan fonksiyon
+  function openSection(sectionId) {
+    // Önce tüm bölümleri (home, donem, yazar, tema) gizle
+    const sections = ['home', 'donem', 'yazar', 'tema'];
+    sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.style.display = 'none';
+        }
+    });
+
+    // Sadece tıklanan bölümü göster
+    const targetElement = document.getElementById(sectionId);
+    if (targetElement) {
+        targetElement.style.display = 'block';
+        console.log(sectionId + " bölümü açıldı.");
+    } else {
+        console.error("Hata: " + sectionId + " id'li bölüm bulunamadı!");
+    }
+}
  // 1. Dosyaları tarayan ana fonksiyon
  // Global Değişkenler: Dosyalardan taranan veriler burada saklanacak
   let globalStyleData = {};
