@@ -102,26 +102,28 @@
   </div>  <!-- DÖNEM -->  <div id="donem" class="section">
     <h3>1. Konuşmacı Dönemini Seçiniz</h3>
     <select id="donem1" onchange="updateAuthors(1)">
+      <option value="islamiyet">İslamiyet Öncesi</option>
       <option value="divan">Divan Edebiyatı</option>
+      <option value="gecis">Geçiş Dönemi</option>
       <option value="tanzimat">Tanzimat</option>
       <option value="servet">Servet-i Fünun</option>
-      <option value="cumhuriyet">Cumhuriyet</option>
-      <option value="gecis">Geçiş Dönemi</option>
-      <option value="islamiyet">İslamiyet Öncesi</option>
+      <option value="fecri">Fecr-i Ati</option>
       <option value="halk">Halk Edebiyatı</option>
       <option value="milli">Milli Edebiyat</option>
+      <option value="cumhuriyet">Cumhuriyet</option>
     </select>
     <div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
     <select id="yazar1"></select><h3>2. Konuşmacı Dönemini Seçiniz</h3>
 <select id="donem2" onchange="updateAuthors(2)">
-  <option value="divan">Divan Edebiyatı</option>
-  <option value="tanzimat">Tanzimat</option>
-  <option value="servet">Servet-i Fünun</option>
-  <option value="cumhuriyet">Cumhuriyet</option>
-  <option value="gecis">Geçiş Dönemi</option>
-  <option value="islamiyet">İslamiyet Öncesi</option>
-  <option value="halk">Halk Edebiyatı</option>
-  <option value="milli">Milli Edebiyat</option>
+      <option value="islamiyet">İslamiyet Öncesi</option>
+      <option value="divan">Divan Edebiyatı</option>
+      <option value="gecis">Geçiş Dönemi</option>
+      <option value="tanzimat">Tanzimat</option>
+      <option value="servet">Servet-i Fünun</option>
+      <option value="fecri">Fecr-i Ati</option>
+      <option value="halk">Halk Edebiyatı</option>
+      <option value="milli">Milli Edebiyat</option>
+      <option value="cumhuriyet">Cumhuriyet</option>
 </select>
 <div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
 <select id="yazar2"></select>
@@ -138,12 +140,31 @@
   </div>  <!-- YAZAR -->  <div id="yazar" class="section">
     <h3>Yazar Seçiniz</h3>
     <select>
-      <option>Namık Kemal</option>
-      <option>Tevfik Fikret</option>
+        <option>Ahmet Hamdi Tanpınar</option>
+        <option>Ahmet Haşim</option>
+        <option>Faruk Nafiz Çamlıbel</option>
+        <option>Namık Kemal</option>
+        <option>Ahmet Hamdi Tanpınar</option>
+        <option>Peyami Safa</option>v
+        <option>Reşat Nuri Güntekin</option>
+        <option>Sabahattin Ali</option>
+        <option>Ömer Seyfettin</option>
+        <option>Sait Faik Abasıyanık</option> 
+        <option>Tarık Buğra</option>
+      
     </select>
     <select>
-      <option>Ahmet Hamdi Tanpınar</option>
-      <option>Orhan Veli</option>
+        <option>Ahmet Hamdi Tanpınar</option>
+        <option>Ahmet Haşim</option>
+        <option>Faruk Nafiz Çamlıbel</option>
+        <option>Namık Kemal</option>
+        <option>Ahmet Hamdi Tanpınar</option>
+        <option>Peyami Safa</option>v
+        <option>Reşat Nuri Güntekin</option>
+        <option>Sabahattin Ali</option>
+        <option>Ömer Seyfettin</option>
+        <option>Sait Faik Abasıyanık</option> 
+        <option>Tarık Buğra</option>
     </select>
     <button id="generateBtnyazar">Metin Oluştur</button>
     <div class="result">
@@ -166,19 +187,33 @@
     </select>
     <div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
     <select>
-      <option>Rastgele</option>
-      <option>Namık Kemal</option>
-      <option>Tevfik Fikret</option>
-      <option>Orhan Veli</option>
-      <option>Yaşar Kemal</option>
+        <option>Rastgele</option>
+        <option>Ahmet Hamdi Tanpınar</option>
+        <option>Ahmet Haşim</option>
+        <option>Faruk Nafiz Çamlıbel</option>
+        <option>Namık Kemal</option>
+        <option>Ahmet Hamdi Tanpınar</option>
+        <option>Peyami Safa</option>v
+        <option>Reşat Nuri Güntekin</option>
+        <option>Sabahattin Ali</option>
+        <option>Ömer Seyfettin</option>
+        <option>Sait Faik Abasıyanık</option> 
+        <option>Tarık Buğra</option>
     </select>
     <div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
     <select>
-      <option>Rastgele</option>
-      <option>Ahmet Hamdi Tanpınar</option>
-      <option>Nazım Hikmet</option>
-      <option>Ziya Gökalp</option>
-      <option>Yakup Kadri</option>
+        <option>Rastgele</option>
+        <option>Ahmet Hamdi Tanpınar</option>
+        <option>Ahmet Haşim</option>
+        <option>Faruk Nafiz Çamlıbel</option>
+        <option>Namık Kemal</option>
+        <option>Ahmet Hamdi Tanpınar</option>
+        <option>Peyami Safa</option>v
+        <option>Reşat Nuri Güntekin</option>
+        <option>Sabahattin Ali</option>
+        <option>Ömer Seyfettin</option>
+        <option>Sait Faik Abasıyanık</option> 
+        <option>Tarık Buğra</option>
     </select>
     <button id="generateBtndonem">Metin Oluştur</button>
     <div class="result">
@@ -188,14 +223,15 @@
     <button class="back-btn" onclick="goHome()">Geri</button>
   </div></div><script>
   const authors = {
-    divan: ["Rastgele","Fuzuli","Baki","Nedim"],
-    tanzimat: ["Rastgele","Namık Kemal","Ziya Paşa","Şinasi"],
-    servet: ["Rastgele","Tevfik Fikret","Cenap Şahabettin","Halit Ziya"],
-    cumhuriyet: ["Rastgele","Orhan Veli","Nazım Hikmet","Yaşar Kemal"],
-    gecis: ["Rastgele","Yunus Emre","Hoca Dehhani"],
-    islamiyet: ["Rastgele","Bilge Kağan","Tonyukuk"],
-    halk: ["Rastgele","Karacaoğlan","Aşık Veysel","Dadaloğlu"],
-    milli: ["Rastgele","Ömer Seyfettin","Ziya Gökalp","Yakup Kadri"]
+    divan: ["Rastgele"],
+    tanzimat: ["Rastgele","Namık Kemal"],
+    fecri,: ["Rastgele","Ahmet Haşim"],
+    servet: ["Rastgele","Halit Ziya Uşaklıgil"],
+    cumhuriyet: ["Rastgele","Ahmet Hamdi Tanpınar","Peyami Safa","Sabahattin Ali","Sait Faik Abasıyanık","Tarık Buğra"],
+    gecis: ["Rastgele"],
+    islamiyet: ["Rastgele"],
+    halk: ["Rastgele"],
+    milli: ["Rastgele","Faruk Nafiz Çamlıbel","Reşat Nuri Güntekin","Ömer Seyfettin"]
   };
 
   function updateAuthors(num) {
