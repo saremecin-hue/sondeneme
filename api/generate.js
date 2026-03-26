@@ -1,34 +1,24 @@
-document.addEventListener("DOMContentLoaded", () => {
+export default async function handler(req, res) {
+  try {
+    const { prompt } = req.body;
 
-  document.getElementById("generateBtn").addEventListener("click", async () => {
-
-    console.log("butona basıldı"); // TEST
-
-    const yazar1 = document.getElementById("yazar1").value;
-    const yazar2 = document.getElementById("yazar2").value;
-    const tema = document.getElementById("temaSec")?.value || "genel";
-
-    const prompt = `
-    ${yazar1} ve ${yazar2} arasında "${tema}" temalı edebi diyalog oluştur.
-    400-600 kelime olsun.
-    Sonunda analiz ekle.
-    `;
-
-    const res = await fetch("/api/generate", {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
       },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [{ role: "user", content: prompt }]
+      })
     });
 
-    const data = await res.json();
+    const data = await response.json();
 
-    console.log(data); // TEST
+    res.status(200).json(data);
 
-    document.querySelector("#donem .result p").innerText =
-      data.choices?.[0]?.message?.content || "Hata oluştu";
-
-  });
-
-});
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
