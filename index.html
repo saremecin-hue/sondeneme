@@ -254,7 +254,7 @@
         console.log("Veri setleri taranıyor...");
         const [styleRes, themeRes, eraRes] = await Promise.all([
             fetch('/data/style_vectors.json'),
-            fetch('/data/yazar_temalar.txt'),
+            fetch('/data/yazar_temala-yorumlari.txt'),
             fetch('/data/edebi_donemler.txt')
         ]);
 
