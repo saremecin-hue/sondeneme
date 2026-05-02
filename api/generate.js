@@ -8,9 +8,9 @@ export default async function handler(req, res) {
     const { prompt, y1_analiz, y2_analiz, donem_verisi } = req.body;
 
     // Eksik veri kontrolü
-    if (!prompt || !y1_analiz || !y2_analiz || !donem_verisi) {
-      return res.status(400).json({ error: "Eksik veri gönderildi" });
-    }
+    //if (!prompt || !y1_analiz || !y2_analiz || !donem_verisi) {
+      //return res.status(400).json({ error: "Eksik veri gönderildi" });
+    //}
 
     // 🔥 DETAYLI SYSTEM PROMPT (TEK PARAGRAF)
     const systemPrompt =
