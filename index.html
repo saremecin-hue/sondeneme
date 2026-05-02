@@ -253,9 +253,9 @@
     try {
         console.log("Veri setleri taranıyor...");
         const [styleRes, themeRes, eraRes] = await Promise.all([
-            fetch('/data/style_vectors.json'),
-            fetch('/data/yazar_temalar.txt'),
-            fetch('/data/edebi_donemler.txt')
+            fetch('/public/data/style_vectors.json'),
+            fetch('/public/data/yazar_temalar.txt'),
+            fetch('/public/data/edebi_donemler.txt')
         ]);
 
         if (!styleRes.ok || !themeRes.ok || !eraRes.ok) throw new Error("Dosyalardan biri bulunamadı!");
