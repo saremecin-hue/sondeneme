@@ -222,6 +222,37 @@
     </div>
     <button class="back-btn" onclick="goHome()">Geri</button>
   </div></div><script>
+      const authorsByEra = {
+    islamiyet: ["Bilge Kağan", "Dede Korkut"],
+    divan: ["Fuzuli", "Baki"],
+    tanzimat: ["Namık Kemal", "Şinasi"],
+    servet: ["Halit Ziya Uşaklıgil", "Tevfik Fikret"],
+    milli: ["Ömer Seyfettin", "Ziya Gökalp"],
+    cumhuriyet: ["Ahmet Hamdi Tanpınar", "Tarık Buğra"]
+  };
+
+  function updateAuthors(num) {
+    const donem = document.getElementById(donem${num}).value;
+    const select = document.getElementById(yazar${num});
+
+    select.innerHTML = "";
+
+    (authorsByEra[donem] || []).forEach(yazar => {
+      const option = document.createElement("option");
+      option.value = yazar;
+      option.textContent = yazar;
+      select.appendChild(option);
+    });
+  }
+
+  function goHome() {
+    const sections = ['home', 'donem', 'yazar', 'tema'];
+    sections.forEach(id => {
+      document.getElementById(id).style.display = 'none';
+    });
+  
+    document.getElementById("home").style.display = "block";
+  }
     // Sayfa geçişlerini sağlayan fonksiyon
   function openSection(sectionId) {
     // Önce tüm bölümleri (home, donem, yazar, tema) gizle
@@ -298,32 +329,69 @@
         }
     }
     return bulunanBölüm || `${yazarAdi} için tematik veri bulunamadı.`;
-}
+  };
+  const btnTema = document.getElementById("generateBtndonem");
 
+  if (btnTema) {
+    btnTema.addEventListener("click", async () => {
+
+      const selects = document.querySelectorAll("#tema select");
+      const y1 = selects[0].value;
+      const y2 = selects[1].value;
+      const tema = document.getElementById("temaSec").value;
+
+      const resultBox = document.querySelector("#tema .result p");
+      resultBox.innerText = "Oluşturuluyor... ⏳";
+
+      const res = await fetch("/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: `${y1} ve ${y2} arasında "${tema}" teması üzerine bir diyalog oluştur.`,
+          y1_analiz: { uslup: globalStyleData[y1], tema: yazarMetniAyikla(globalThemeContent, y1) },
+          y2_analiz: { uslup: globalStyleData[y2], tema: yazarMetniAyikla(globalThemeContent, y2) },
+          donem_verisi: globalEraContent
+        })
+      });
+
+    const data = await res.json();
+    resultBox.innerText = data.choices?.[0]?.message?.content || "Hata oluştu";
+  });
+}
 // 3. ADIM: Buton Olay Dinleyicisi
   document.addEventListener("DOMContentLoaded", () => {
     veriSetleriniYukle(); // Sayfa açılınca taramayı başlat
+    updateAuthors(1);
+    updateAuthors(2);
+    const btnYazar = document.getElementById("generateBtnyazar");
 
-    const btn = document.getElementById("generateBtn");
-    if (btn) {
-        btn.addEventListener("click", async () => {
-            const y1 = document.getElementById("yazar1").value;
-            const y2 = document.getElementById("yazar2").value;
-            const tema = document.getElementById("temaSec")?.value || "Genel Edebiyat";
-            const resultBox = document.querySelector("#donem .result p");
+if (btnYazar) {
+  btnYazar.addEventListener("click", async () => {
 
-            if (resultBox) resultBox.innerText = "Veri setleri taranıyor ve yapay zeka hazırlanıyor... ⏳";
+    const selects = document.querySelectorAll("#yazar select");
+    const y1 = selects[0].value;
+    const y2 = selects[1].value;
 
-            // Dosyalardan seçilen yazarların verilerini süz
-            const y1_paketi = {
-                uslup: globalStyleData[y1] || globalStyleData["Tağrık Buğra"] || {},
-                tema: yazarMetniAyikla(globalThemeContent, y1)
-            };
+    const resultBox = document.querySelector("#yazar .result p");
+    resultBox.innerText = "Oluşturuluyor... ⏳";
 
-            const y2_paketi = {
-                uslup: globalStyleData[y2] || globalStyleData["Tağrık Buğra"] || {},
-                tema: yazarMetniAyikla(globalThemeContent, y2)
-            };
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prompt: `${y1} ve ${y2} arasında genel bir edebi diyalog oluştur.`,
+        y1_analiz: { uslup: globalStyleData[y1], tema: yazarMetniAyikla(globalThemeContent, y1) },
+        y2_analiz: { uslup: globalStyleData[y2], tema: yazarMetniAyikla(globalThemeContent, y2) },
+        donem_verisi: globalEraContent
+      })
+    });
+
+    const data = await res.json();
+    resultBox.innerText = data.choices?.[0]?.message?.content || "Hata oluştu";
+  });
+}
+
+    ;
 
             try {
                 const res = await fetch("/api/generate", {
