@@ -1,4 +1,8 @@
 export default async function handler(req, res) {
+  box.innerHTML = data.choices?.[0]?.message?.content
+  .split("\n")
+  .map(line => `<div style="margin-bottom:10px;">${line}</div>`)
+  .join("");
   try {
     // Sadece POST kabul et
     if (req.method !== "POST") {
