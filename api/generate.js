@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     const { prompt, y1_analiz, y2_analiz, donem_verisi } = req.body;
 
-     Eksik veri kontrolü
+     //Eksik veri kontrolü
     if (!prompt || !y1_analiz || !y2_analiz || !donem_verisi) {
       return res.status(400).json({ error: "Eksik veri gönderildi" });
     }
