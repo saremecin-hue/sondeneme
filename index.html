@@ -7,25 +7,35 @@
 
 <style>
 body {
-  margin:0;
-  font-family: Arial;
-  background: linear-gradient(135deg,#4facfe,#00f2fe);
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #333;
 }
 
-header{
-  text-align:center;
-  padding:20px;
-  color:white;
-  font-size:28px;
+header {
+  text-align: center;
+  padding: 25px;
+  color: white;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
-
-.container{
-  width:90%;
-  max-width:1000px;
-  margin:auto;
-  background:white;
-  padding:20px;
-  border-radius:20px;
+select {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
 }
 
 .card{
@@ -37,11 +47,54 @@ header{
 }
 
 .section{display:none;}
+.home-options {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-button{
-  padding:10px;
-  width:100%;
-  margin-top:10px;
+.card {
+  flex: 1 1 250px;
+  padding: 30px;
+  border-radius: 20px;
+  background: linear-gradient(135deg,#4facfe,#00f2fe);
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+button {
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(135deg,#4facfe,#00c6ff);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.result {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f4f7fb;
+  border-radius: 15px;
+  line-height: 1.7;
+  max-height: 300px;
+  overflow-y: auto;
+  font-size: 15px;
+}
+button:hover {
+  transform: scale(1.05);
 }
 </style>
 </head>
