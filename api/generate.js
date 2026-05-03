@@ -46,11 +46,32 @@ export default async function handler(req, res) {
       })
     });
 
-    const data = await response.json();
-    box.innerHTML = data.choices?.[0]?.message?.content
+    const data = await res.json();
+
+console.log("API CEVAP:", data);
+
+if (!data.choices || !data.choices[0]) {
+  box.innerText = "Cevap oluşturulamadı";
+  return;
+}
+
+const content = data.choices[0].message?.content;
+
+if (!content) {
+  box.innerText = "Boş cevap geldi";
+  return;
+}
+
+box.innerHTML = content
   .split("\n")
-  .map(line => `<div style="margin-bottom:10px;">${line}</div>`)
-  .join(""); 
+  .map(line => {
+    if (line.includes(":")) {
+      const [name, text] = line.split(":");
+      return `<div><b>${name}:</b> ${text}</div>`;
+    }
+    return `<div>${line}</div>`;
+  })
+  .join("");
 
     // 🔥 API HATA KONTROLÜ
     if (data.error) {
