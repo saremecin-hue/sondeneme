@@ -1,423 +1,259 @@
-<!DOCTYPE html><html lang="tr">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eko-Söz</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
-      color: #333;
-    }
-    header {
-      text-align: center;
-      padding: 20px;
-      background: rgba(255,255,255,0.2);
-      backdrop-filter: blur(10px);
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
-    }
-    .container {
-      width: 90%;
-      max-width: 1000px;
-      margin: 20px auto;
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-    .home-options {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap; /* mobilde alt alta geçmesini sağlar */
-    }
-    .card {
-      flex: 1 1 200px;
-      padding: 30px;
-      border-radius: 15px;
-      background: #f5f5f5;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.3s;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .card:hover {
-      background: #4facfe;
-      color: white;
-      transform: translateY(-5px);
-    }
-    .section {
-      display: none;
-    }
-    select, button {
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-      font-size: 16px;
-      width: 100%; /* tam genişlik */
-      box-sizing: border-box;
-    }
-    button {
-      background: #4facfe;
-      color: white;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #00c6ff;
-    }
-    .result {
-      margin-top: 20px;
-      padding: 20px;
-      background: #f9f9f9;
-      border-radius: 10px;
-      line-height: 1.6;
-    }
-    .back-btn {
-      margin-top: 20px;
-      background: #ccc;
-      color: black;
-    }
-    .sub {
-      font-weight: bold;
-      margin-top: 10px;
-    }@media (max-width: 600px) {
-  header { font-size: 24px; }
-  .card { font-size: 16px; padding: 20px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eko-Söz</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+  background: linear-gradient(135deg,#4facfe,#00f2fe);
 }
 
-  </style>
+header{
+  text-align:center;
+  padding:20px;
+  color:white;
+  font-size:28px;
+}
+
+.container{
+  width:90%;
+  max-width:1000px;
+  margin:auto;
+  background:white;
+  padding:20px;
+  border-radius:20px;
+}
+
+.card{
+  padding:30px;
+  background:#eee;
+  margin:10px;
+  cursor:pointer;
+  border-radius:15px;
+}
+
+.section{display:none;}
+
+button{
+  padding:10px;
+  width:100%;
+  margin-top:10px;
+}
+</style>
 </head>
-<body><header>Eko-Söz</header>
-<div class="container">  <div id="home">
-    <div class="home-options">
-      <div class="card" onclick="openSection('donem')">Dönemine Göre</div>
-      <div class="card" onclick="openSection('yazar')">Yazarına Göre</div>
-      <div class="card" onclick="openSection('tema')">Temasına Göre</div>
-    </div>
-  </div>  <!-- DÖNEM -->  <div id="donem" class="section">
-    <h3>1. Konuşmacı Dönemini Seçiniz</h3>
-    <select id="donem1" onchange="updateAuthors(1)">
-      <option value="islamiyet">İslamiyet Öncesi</option>
-      <option value="divan">Divan Edebiyatı</option>
-      <option value="gecis">Geçiş Dönemi</option>
-      <option value="tanzimat">Tanzimat</option>
-      <option value="servet">Servet-i Fünun</option>
-      <option value="fecri">Fecr-i Ati</option>
-      <option value="halk">Halk Edebiyatı</option>
-      <option value="milli">Milli Edebiyat</option>
-      <option value="cumhuriyet">Cumhuriyet</option>
-    </select>
-    <div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
-    <select id="yazar1"></select><h3>2. Konuşmacı Dönemini Seçiniz</h3>
-<select id="donem2" onchange="updateAuthors(2)">
-      <option value="islamiyet">İslamiyet Öncesi</option>
-      <option value="divan">Divan Edebiyatı</option>
-      <option value="gecis">Geçiş Dönemi</option>
-      <option value="tanzimat">Tanzimat</option>
-      <option value="servet">Servet-i Fünun</option>
-      <option value="fecri">Fecr-i Ati</option>
-      <option value="halk">Halk Edebiyatı</option>
-      <option value="milli">Milli Edebiyat</option>
-      <option value="cumhuriyet">Cumhuriyet</option>
+
+<body>
+
+<header>Eko-Söz</header>
+
+<div class="container">
+
+<!-- HOME -->
+<div id="home">
+  <div class="card" onclick="openSection('donem')">Dönemine Göre</div>
+  <div class="card" onclick="openSection('yazar')">Yazarına Göre</div>
+  <div class="card" onclick="openSection('tema')">Temasına Göre</div>
+</div>
+
+<!-- DÖNEM -->
+<div id="donem" class="section">
+
+<select id="donem1" onchange="updateAuthors(1)">
+  <option value="tanzimat">Tanzimat</option>
+  <option value="servet">Servet-i Fünun</option>
+  <option value="cumhuriyet">Cumhuriyet</option>
 </select>
-<div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
+
+<select id="yazar1"></select>
+
+<select id="donem2" onchange="updateAuthors(2)">
+  <option value="tanzimat">Tanzimat</option>
+  <option value="servet">Servet-i Fünun</option>
+  <option value="cumhuriyet">Cumhuriyet</option>
+</select>
+
 <select id="yazar2"></select>
 
 <button id="generateBtn">Metin Oluştur</button>
 
-<div class="result">
-  <h3>Sonuç</h3>
-  <p>Burada metin ve analiz görünecek...</p>
+<div class="result"><p></p></div>
+
+<button onclick="goHome()">Geri</button>
+
 </div>
 
-<button class="back-btn" onclick="goHome()">Geri</button>
+<!-- YAZAR -->
+<div id="yazar" class="section">
 
-  </div>  <!-- YAZAR -->  <div id="yazar" class="section">
-    <h3>Yazar Seçiniz</h3>
-    <select>
-        <option>Ahmet Hamdi Tanpınar</option>
-        <option>Ahmet Haşim</option>
-        <option>Faruk Nafiz Çamlıbel</option>
-        <option>Namık Kemal</option>
-        <option>Ahmet Hamdi Tanpınar</option>
-        <option>Peyami Safa</option>
-        <option>Reşat Nuri Güntekin</option>
-        <option>Sabahattin Ali</option>
-        <option>Ömer Seyfettin</option>
-        <option>Sait Faik Abasıyanık</option> 
-        <option>Tarık Buğra</option>
-      
-    </select>
-    <select>
-        <option>Ahmet Hamdi Tanpınar</option>
-        <option>Ahmet Haşim</option>
-        <option>Faruk Nafiz Çamlıbel</option>
-        <option>Namık Kemal</option>
-        <option>Ahmet Hamdi Tanpınar</option>
-        <option>Peyami Safa</option>
-        <option>Reşat Nuri Güntekin</option>
-        <option>Sabahattin Ali</option>
-        <option>Ömer Seyfettin</option>
-        <option>Sait Faik Abasıyanık</option> 
-        <option>Tarık Buğra</option>
-    </select>
-    <button id="generateBtnyazar">Metin Oluştur</button>
-    <div class="result">
-      <h3>Sonuç</h3>
-      <p>Burada karşılaştırma sonucu görünecek...</p>
-    </div>
-    <button class="back-btn" onclick="goHome()">Geri</button>
-  </div>  <!-- TEMA -->  <div id="tema" class="section">
-    <h3>Tema Seçiniz</h3>
-    <select id="temaSec">
-      <option value="ahlak">Ahlak ve Vicdan</option>
-      <option value="vatan">Vatanseverlik ve Özgürlük</option>
-      <option value="toplum">İnsan ve Toplum Çatışması</option>
-      <option value="modern">Gelenek ve Modernleşme</option>
-      <option value="kader">Kader ve İrade</option>
-      <option value="yasam">Yaşam ve Ölüm</option>
-      <option value="adalet">Adalet ve Eşitlik</option>
-      <option value="ask">Aşk ve Sevgi</option>
-      <option value="yalnizlik">Yalnızlık ve İç Hesaplaşma</option>
-    </select>
-    <div class="sub">1. Konuşmacı (Opsiyonel Yazar)</div>
-    <select>
-        <option>Rastgele</option>
-        <option>Ahmet Hamdi Tanpınar</option>
-        <option>Ahmet Haşim</option>
-        <option>Faruk Nafiz Çamlıbel</option>
-        <option>Namık Kemal</option>
-        <option>Ahmet Hamdi Tanpınar</option>
-        <option>Peyami Safa</option>
-        <option>Reşat Nuri Güntekin</option>
-        <option>Sabahattin Ali</option>
-        <option>Ömer Seyfettin</option>
-        <option>Sait Faik Abasıyanık</option> 
-        <option>Tarık Buğra</option>
-    </select>
-    <div class="sub">2. Konuşmacı (Opsiyonel Yazar)</div>
-    <select>
-        <option>Rastgele</option>
-        <option>Ahmet Hamdi Tanpınar</option>
-        <option>Ahmet Haşim</option>
-        <option>Faruk Nafiz Çamlıbel</option>
-        <option>Namık Kemal</option>
-        <option>Ahmet Hamdi Tanpınar</option>
-        <option>Peyami Safa</option>
-        <option>Reşat Nuri Güntekin</option>
-        <option>Sabahattin Ali</option>
-        <option>Ömer Seyfettin</option>
-        <option>Sait Faik Abasıyanık</option> 
-        <option>Tarık Buğra</option>
-    </select>
-    <button id="generateBtndonem">Metin Oluştur</button>
-    <div class="result">
-      <h3>Sonuç</h3>
-      <p>Seçilen tema ve yazarlara göre oluşturulan metin burada görünecek...</p>
-    </div>
-    <button class="back-btn" onclick="goHome()">Geri</button>
-  </div></div><script>
-      const authorsByEra = {
-    islamiyet: ["Bilge Kağan", "Dede Korkut"],
-    divan: ["Fuzuli", "Baki"],
-    tanzimat: ["Namık Kemal", "Şinasi"],
-    servet: ["Halit Ziya Uşaklıgil", "Tevfik Fikret"],
-    milli: ["Ömer Seyfettin", "Ziya Gökalp"],
-    cumhuriyet: ["Ahmet Hamdi Tanpınar", "Tarık Buğra"]
-  };
+<select id="yazarA">
+<option>Ahmet Hamdi Tanpınar</option>
+<option>Halit Ziya Uşaklıgil</option>
+<option>Tarık Buğra</option>
+</select>
 
-  function updateAuthors(num) {
-    const donem = document.getElementById(donem${num}).value;
-    const select = document.getElementById(yazar${num});
+<select id="yazarB">
+<option>Ahmet Hamdi Tanpınar</option>
+<option>Halit Ziya Uşaklıgil</option>
+<option>Tarık Buğra</option>
+</select>
 
-    select.innerHTML = "";
+<button id="generateBtnYazar">Metin Oluştur</button>
 
-    (authorsByEra[donem] || []).forEach(yazar => {
-      const option = document.createElement("option");
-      option.value = yazar;
-      option.textContent = yazar;
-      select.appendChild(option);
-    });
+<div class="result"><p></p></div>
+
+<button onclick="goHome()">Geri</button>
+
+</div>
+
+<!-- TEMA -->
+<div id="tema" class="section">
+
+<select id="temaSec">
+<option value="ask">Aşk</option>
+<option value="vatan">Vatan</option>
+<option value="adalet">Adalet</option>
+</select>
+
+<select id="yazarT1">
+<option>Ahmet Hamdi Tanpınar</option>
+<option>Halit Ziya Uşaklıgil</option>
+<option>Tarık Buğra</option>
+</select>
+
+<select id="yazarT2">
+<option>Ahmet Hamdi Tanpınar</option>
+<option>Halit Ziya Uşaklıgil</option>
+<option>Tarık Buğra</option>
+</select>
+
+<button id="generateBtnTema">Metin Oluştur</button>
+
+<div class="result"><p></p></div>
+
+<button onclick="goHome()">Geri</button>
+
+</div>
+
+</div>
+
+<script>
+
+let styleData={}
+let themeData=""
+let eraData=""
+
+const authorsByEra={
+  tanzimat:["Namık Kemal"],
+  servet:["Halit Ziya Uşaklıgil"],
+  cumhuriyet:["Ahmet Hamdi Tanpınar","Tarık Buğra"]
+}
+
+// SAYFA GEÇİŞ
+function openSection(id){
+  ["home","donem","yazar","tema"].forEach(x=>{
+    document.getElementById(x).style.display="none"
+  })
+  document.getElementById(id).style.display="block"
+}
+
+function goHome(){
+  openSection("home")
+}
+
+// YAZARLARI DOLDUR
+function updateAuthors(n){
+  const donem=document.getElementById("donem"+n).value
+  const select=document.getElementById("yazar"+n)
+
+  select.innerHTML=""
+
+  authorsByEra[donem].forEach(a=>{
+    const opt=document.createElement("option")
+    opt.text=a
+    select.add(opt)
+  })
+}
+
+// VERİLERİ YÜKLE
+async function loadData(){
+  const res1=await fetch("/data/style_vectors.json")
+  const res2=await fetch("/data/yazar_temalar.txt")
+  const res3=await fetch("/data/edebi_donemler.txt")
+
+  styleData=await res1.json()
+  themeData=await res2.text()
+  eraData=await res3.text()
+}
+
+// API ÇAĞRISI
+async function generate(prompt,y1,y2,box){
+
+  const y1_data={
+    uslup:styleData[y1],
+    tema:themeData
   }
 
-  function goHome() {
-    const sections = ['home', 'donem', 'yazar', 'tema'];
-    sections.forEach(id => {
-      document.getElementById(id).style.display = 'none';
-    });
-  
-    document.getElementById("home").style.display = "block";
+  const y2_data={
+    uslup:styleData[y2],
+    tema:themeData
   }
-    // Sayfa geçişlerini sağlayan fonksiyon
-  function openSection(sectionId) {
-    // Önce tüm bölümleri (home, donem, yazar, tema) gizle
-    const sections = ['home', 'donem', 'yazar', 'tema'];
-    sections.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.style.display = 'none';
-        }
-    });
 
-    // Sadece tıklanan bölümü göster
-    const targetElement = document.getElementById(sectionId);
-    if (targetElement) {
-        targetElement.style.display = 'block';
-        console.log(sectionId + " bölümü açıldı.");
-    } else {
-        console.error("Hata: " + sectionId + " id'li bölüm bulunamadı!");
-    }
-}
- // 1. Dosyaları tarayan ana fonksiyon
- // Global Değişkenler: Dosyalardan taranan veriler burada saklanacak
-  let globalStyleData = {};
-  let globalThemeContent = "";
-  let globalEraContent = "";
+  const res=await fetch("/api/generate",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      prompt:prompt,
+      y1_analiz:y1_data,
+      y2_analiz:y2_data,
+      donem_verisi:eraData
+    })
+  })
 
-// 1. ADIM: Sayfa yüklendiğinde tüm veri setlerini tara ve hafızaya al
-  async function veriSetleriniYukle() {
-    try {
-        console.log("Veri setleri taranıyor...");
-        const [styleRes, themeRes, eraRes] = await Promise.all([
-            fetch('/data/style_vectors.json'),
-            fetch('/data/yazar_tema_yorumlari.txt'),
-            fetch('/data/edebi_donemler.txt')
-        ]);
+  const data=await res.json()
 
-        if (!styleRes.ok || !themeRes.ok || !eraRes.ok) throw new Error("Dosyalardan biri bulunamadı!");
-
-        globalStyleData = await styleRes.json();
-        globalThemeContent = await themeRes.text();
-        globalEraContent = await eraRes.text();
-
-        console.log("Sistem Hazır: 3 veri seti başarıyla tarandı.");
-    } catch (err) {
-        console.error("Kritik Hata: Veri setleri yüklenemedi!", err);
-    }
+  box.innerText=data.choices?.[0]?.message?.content || "Hata"
 }
 
-// 2. ADIM: TXT dosyası içinden seçilen yazara ait bölümü cımbızla çeken fonksiyon
-  function yazarMetniAyikla(tumMetin, yazarAdi) {
-    if (!tumMetin) return "Veri bulunamadı.";
-    
-    const satirlar = tumMetin.split('\n');
-    let bulunanBölüm = "";
-    let kaydetmeyeBasla = false;
+// BUTTONS
+document.addEventListener("DOMContentLoaded",()=>{
 
-    // Yazım hatası toleransı (Tağrık -> Tarık kontrolü)
-    const arananYazar = yazarAdi.replace("Tarık", "Tağrık").toUpperCase();
-    const normalYazar = yazarAdi.toUpperCase();
+  loadData()
 
-    for (let satir of satirlar) {
-        const temizSatir = satir.trim();
-        // Eğer satır yazarın adını içeriyorsa kaydetmeye başla
-        if (temizSatir.includes(normalYazar) || temizSatir.includes(arananYazar)) {
-            kaydetmeyeBasla = true;
-        } 
-        // Eğer kaydetme modundaysak ve yeni bir büyük başlığa geldiysek dur
-        else if (kaydetmeyeBasla && temizSatir.length > 3 && /^[A-ZÇĞİÖŞÜ\s]+$/.test(temizSatir)) {
-            break;
-        }
+  updateAuthors(1)
+  updateAuthors(2)
 
-        if (kaydetmeyeBasla) {
-            bulunanBölüm += satir + "\n";
-        }
-    }
-    return bulunanBölüm || `${yazarAdi} için tematik veri bulunamadı.`;
-  };
-  const btnTema = document.getElementById("generateBtndonem");
+  document.getElementById("generateBtn").onclick=()=>{
+    const y1=document.getElementById("yazar1").value
+    const y2=document.getElementById("yazar2").value
+    const box=document.querySelector("#donem .result p")
 
-  if (btnTema) {
-    btnTema.addEventListener("click", async () => {
+    generate(`${y1} ve ${y2} konuşsun`,y1,y2,box)
+  }
 
-      const selects = document.querySelectorAll("#tema select");
-      const y1 = selects[0].value;
-      const y2 = selects[1].value;
-      const tema = document.getElementById("temaSec").value;
+  document.getElementById("generateBtnYazar").onclick=()=>{
+    const y1=document.getElementById("yazarA").value
+    const y2=document.getElementById("yazarB").value
+    const box=document.querySelector("#yazar .result p")
 
-      const resultBox = document.querySelector("#tema .result p");
-      resultBox.innerText = "Oluşturuluyor... ⏳";
+    generate(`${y1} ve ${y2} karşılaştır`,y1,y2,box)
+  }
 
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          prompt: `${y1} ve ${y2} arasında "${tema}" teması üzerine bir diyalog oluştur.`,
-          y1_analiz: { uslup: globalStyleData[y1], tema: yazarMetniAyikla(globalThemeContent, y1) },
-          y2_analiz: { uslup: globalStyleData[y2], tema: yazarMetniAyikla(globalThemeContent, y2) },
-          donem_verisi: globalEraContent
-        })
-      });
+  document.getElementById("generateBtnTema").onclick=()=>{
+    const y1=document.getElementById("yazarT1").value
+    const y2=document.getElementById("yazarT2").value
+    const tema=document.getElementById("temaSec").value
+    const box=document.querySelector("#tema .result p")
 
-    const data = await res.json();
-    resultBox.innerText = data.choices?.[0]?.message?.content || "Hata oluştu";
-  });
-}
-// 3. ADIM: Buton Olay Dinleyicisi
-  document.addEventListener("DOMContentLoaded", () => {
-    veriSetleriniYukle(); // Sayfa açılınca taramayı başlat
-    updateAuthors(1);
-    updateAuthors(2);
-    const btnYazar = document.getElementById("generateBtnyazar");
+    generate(`${y1} ve ${y2} ${tema} hakkında konuşsun`,y1,y2,box)
+  }
 
-if (btnYazar) {
-  btnYazar.addEventListener("click", async () => {
+})
 
-    const selects = document.querySelectorAll("#yazar select");
-    const y1 = selects[0].value;
-    const y2 = selects[1].value;
+</script>
 
-    const resultBox = document.querySelector("#yazar .result p");
-    resultBox.innerText = "Oluşturuluyor... ⏳";
-
-    const res = await fetch("/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        prompt: `${y1} ve ${y2} arasında genel bir edebi diyalog oluştur.`,
-        y1_analiz: { uslup: globalStyleData[y1], tema: yazarMetniAyikla(globalThemeContent, y1) },
-        y2_analiz: { uslup: globalStyleData[y2], tema: yazarMetniAyikla(globalThemeContent, y2) },
-        donem_verisi: globalEraContent
-      })
-    });
-
-    const data = await res.json();
-    resultBox.innerText = data.choices?.[0]?.message?.content || "Hata oluştu";
-  });
-}
-
-    ;
-
-            try {
-                const res = await fetch("/api/generate", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        prompt: `${y1} ve ${y2} arasında "${tema}" üzerine bir diyalog oluştur.`,
-                        y1_analiz: y1_paketi,
-                        y2_analiz: y2_paketi,
-                        donem_verisi: globalEraContent // edebi_donemler.txt içeriği
-                    })
-                });
-
-                const data = await res.json();
-
-                if (data.error) {
-                    resultBox.innerText = "Hata: " + (data.error.message || data.error);
-                } else {
-                    resultBox.innerText = data.choices?.[0]?.message?.content || "Cevap oluşturulamadı.";
-                }
-            } catch (error) {
-                console.error("İstek hatası:", error);
-                resultBox.innerText = "Bağlantı hatası oluştu!";
-            }
-        });
-    }
-  });
-</script></body>
+</body>
 </html>
