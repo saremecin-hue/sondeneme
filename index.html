@@ -280,6 +280,10 @@ async function generate(prompt,y1,y2,box){
 
     // 🔴 JSON değilse yakala
     const text = await res.text();
+    box.innerHTML = content
+      .split("\n")
+      .map(line => `<div>${line}</div>`)
+      .join("");
 
     let data;
     try {
@@ -302,10 +306,7 @@ async function generate(prompt,y1,y2,box){
       return;
     }
 
-    box.innerHTML = content
-      .split("\n")
-      .map(line => `<div>${line}</div>`)
-      .join("");
+  
 
   } catch (err) {
     console.error(err);
