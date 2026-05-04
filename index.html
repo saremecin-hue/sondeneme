@@ -255,29 +255,51 @@ async function generate(prompt,y1,y2,box){
     tema:themeData
   }
 
-  const res=await fetch("/api/generate",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      prompt:prompt,
-      y1_analiz:y1_data,
-      y2_analiz:y2_data,
-      donem_verisi:eraData
+  try {
+    const res = await fetch("/api/generate",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        prompt:prompt,
+        y1_analiz:y1_data,
+        y2_analiz:y2_data,
+        donem_verisi:eraData
+      })
     })
-  })
 
-  const data = await res.json();
-  const content = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
-  
-  if (!content) {
-  box.innerText = "Boş cevap geldi";
-  return;
+    // 🔴 JSON değilse yakala
+    const text = await res.text();
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      box.innerText = "Sunucudan geçersiz cevap geldi ❌";
+      console.error("JSON parse hatası:", text);
+      return;
+    }
+
+    if (data.error) {
+      box.innerText = "API Hatası: " + data.error;
+      return;
+    }
+
+    const content = data.choices?.[0]?.message?.content;
+
+    if (!content) {
+      box.innerText = "Boş cevap geldi";
+      return;
+    }
+
+    box.innerHTML = content
+      .split("\n")
+      .map(line => `<div>${line}</div>`)
+      .join("");
+
+  } catch (err) {
+    console.error(err);
+    box.innerText = "Bağlantı hatası oluştu ⚠️";
   }
-
-box.innerHTML = content
-  .split("\n")
-  .map(line => `<div>${line}</div>`)
-  .join("");
 }
 // BUTTONS
 document.addEventListener("DOMContentLoaded",()=>{
