@@ -275,7 +275,10 @@ if (!content) {
   return;
 }
 
-resultBox.innerHTML = content
+box.innerHTML = content
+  .split("\n")
+  .map(line => `<div>${line}</div>`)
+  .join("");
   .split("\n")
   .map(line => `<div>${line}</div>`)
   .join("");
