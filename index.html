@@ -267,13 +267,12 @@ async function generate(prompt,y1,y2,box){
   })
 
   const data = await res.json();
-
-const content = data.choices?.[0]?.message?.content;
-
-if (!content) {
+  const content = data.choices?.[0]?.message?.content;
+  
+  if (!content) {
   resultBox.innerText = "Boş cevap geldi";
   return;
-}}
+  }
 
 box.innerHTML = content
   .split("\n")
@@ -282,7 +281,7 @@ box.innerHTML = content
   .split("\n")
   .map(line => `<div>${line}</div>`)
   .join("");
-
+}
 // BUTTONS
 document.addEventListener("DOMContentLoaded",()=>{
 
