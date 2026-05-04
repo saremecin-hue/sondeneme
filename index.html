@@ -267,10 +267,10 @@ async function generate(prompt,y1,y2,box){
   })
 
   const data = await res.json();
-  const content = data.choices?.[0]?.message?.content;
+  const content = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
   
   if (!content) {
-  resultBox.innerText = "Boş cevap geldi";
+  Box.innerText = "Boş cevap geldi";
   return;
   }
 
