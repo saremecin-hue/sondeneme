@@ -266,6 +266,17 @@ async function generate(prompt,y1,y2,box){
         donem_verisi:eraData
       })
     })
+    const text = await res.text();
+    console.log("SUNUCU:", text);
+
+    let data;
+
+    try {
+      data = JSON.parse(text);
+    } catch {
+      box.innerText = "Sunucu hatası var ❌";
+      return;
+    }
 
     // 🔴 JSON değilse yakala
     const text = await res.text();
