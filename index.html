@@ -266,18 +266,31 @@ async function generate(prompt,y1,y2,box){
         donem_verisi:eraData
       })
     })
-    const text = await res.text();
-    console.log("SUNUCU:", text);
 
-    let data;
+    const data = await res.json();
 
-    try {
-      data = JSON.parse(text);
-    } catch {
-      box.innerText = "Sunucu hatası var ❌";
+    if (data.error) {
+      box.innerText = "API Hatası: " + data.error;
       return;
     }
 
+    const content = data.choices?.[0]?.message?.content;
+
+    if (!content) {
+      box.innerText = "Boş cevap geldi";
+      return;
+    }
+
+    box.innerHTML = content
+      .split("\n")
+      .map(line => `<div>${line}</div>`)
+      .join("");
+
+  } catch (err) {
+    console.error(err);
+    box.innerText = "Bağlantı hatası ⚠️";
+  }
+}
     // 🔴 JSON değilse yakala
     const text = await res.text();
     box.innerHTML = content
