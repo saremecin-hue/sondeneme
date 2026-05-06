@@ -116,17 +116,25 @@ button:hover {
 <div id="donem" class="section">
 <h3>1. Konuşmacı Dönemi Seçiniz</h3>
 <select id="donem1" onchange="updateAuthors(1)">
+  <option value="islamiyet_oncesi">İslaiyet Öncesi Türk Edebiyatı</option>
+  <option value="halk_edebiyati">Halk Edebiyatı</option>
+  <option value="divan">Divan Edebiyatı</option>
   <option value="tanzimat">Tanzimat</option>
   <option value="servet">Servet-i Fünun</option>
-  <option value="cumhuriyet">Cumhuriyet</option>
+  <option value="milli_edebiyat">Milli Edebiyat</option>
+  <option value="cumhuriyet">Cumhuriyet Dönemi Edebiyatı</option>
 </select>
 <h3>Konuşmacıyı Seçiniz</h3>
 <select id="yazar1"></select>
 <h3>2. Konuşmacı Dönemi Seçiniz</h3>
 <select id="donem2" onchange="updateAuthors(2)">
+  <option value="islamiyet_oncesi">İslaiyet Öncesi Türk Edebiyatı</option>
+  <option value="halk_edebiyati">Halk Edebiyatı</option>
+  <option value="divan">Divan Edebiyatı</option>
   <option value="tanzimat">Tanzimat</option>
   <option value="servet">Servet-i Fünun</option>
-  <option value="cumhuriyet">Cumhuriyet</option>
+  <option value="milli_edebiyat">Milli Edebiyat</option>
+  <option value="cumhuriyet">Cumhuriyet Dönemi Edebiyatı</option>
 </select>
 <h3>2. Konuşmacıyı Seçiniz</h3>
 <select id="yazar2"></select>
@@ -146,12 +154,38 @@ button:hover {
 <option>Ahmet Hamdi Tanpınar</option>
 <option>Halit Ziya Uşaklıgil</option>
 <option>Tarık Buğra</option>
+<option>Faruk Nafız Çamlıbel</option>
+<option>Sabahattin Ali</option>
+<option>Sait Faik Abasıyanık</option>
+<option>Namık Kemal</option></option>
+<option>Peyami Safa</option>
+<option>Ahmet Haşim</option>
+<option>Reşat Nuri Güntekin</option>
+<option>Nedim</option>
+<option>Mevlana Celaleddin-i Rumi</option>
+<option>Aşık Veysel</option>
+<option>Tevfik Fikret</option>
+<option>Yunus Emre</option>
+
+  
 </select>
 <h3>2. Konuşmacıyı Seçiniz</h3>
 <select id="yazarB">
 <option>Ahmet Hamdi Tanpınar</option>
 <option>Halit Ziya Uşaklıgil</option>
 <option>Tarık Buğra</option>
+<option>Faruk Nafız Çamlıbel</option>
+<option>Sabahattin Ali</option>
+<option>Sait Faik Abasıyanık</option>
+<option>Namık Kemal</option></option>
+<option>Peyami Safa</option>
+<option>Ahmet Haşim</option>
+<option>Reşat Nuri Güntekin</option>
+<option>Nedim</option>
+<option>Mevlana Celaleddin-i Rumi</option>
+<option>Aşık Veysel</option>
+<option>Tevfik Fikret</option>
+<option>Yunus Emre</option>
 </select>
 
 <button id="generateBtnYazar">Metin Oluştur</button>
@@ -166,21 +200,51 @@ button:hover {
 <div id="tema" class="section">
 <h3>Tema Seçiniz</h3>
 <select id="temaSec">
-<option value="ask">Aşk</option>
-<option value="vatan">Vatan</option>
-<option value="adalet">Adalet</option>
+<option value="ask">Ahlak ve Vicdan</option>
+<option value="vatan">Vatanseverlik ve Özgürlük</option>
+<option value="adalet">İnsan ve Toplum Çatışması</option>
+<option value="adalet">Gelenek ve Modernleşme</option>
+<option value="adalet">Kader ve İrade</option>
+<option value="adalet">Yaşam ve Ölüm</option>
+<option value="adalet">Adalet ve Eşitlik</option>
+<option value="adalet">Aşk ve Sevgi</option>
+<option value="adalet">Yalnızlık ve İç Hesaplaşma</option>
 </select>
 <h3>1. Konuşmacıyı Seçiniz</h3>
 <select id="yazarT1">
 <option>Ahmet Hamdi Tanpınar</option>
 <option>Halit Ziya Uşaklıgil</option>
 <option>Tarık Buğra</option>
+<option>Faruk Nafız Çamlıbel</option>
+<option>Sabahattin Ali</option>
+<option>Sait Faik Abasıyanık</option>
+<option>Namık Kemal</option></option>
+<option>Peyami Safa</option>
+<option>Ahmet Haşim</option>
+<option>Reşat Nuri Güntekin</option>
+<option>Nedim</option>
+<option>Mevlana Celaleddin-i Rumi</option>
+<option>Aşık Veysel</option>
+<option>Tevfik Fikret</option>
+<option>Yunus Emre</option>
 </select>
 <h3>2. Konuşmacıyı Seçiniz</h3>
 <select id="yazarT2">
 <option>Ahmet Hamdi Tanpınar</option>
 <option>Halit Ziya Uşaklıgil</option>
 <option>Tarık Buğra</option>
+<option>Faruk Nafız Çamlıbel</option>
+<option>Sabahattin Ali</option>
+<option>Sait Faik Abasıyanık</option>
+<option>Namık Kemal</option></option>
+<option>Peyami Safa</option>
+<option>Ahmet Haşim</option>
+<option>Reşat Nuri Güntekin</option>
+<option>Nedim</option>
+<option>Mevlana Celaleddin-i Rumi</option>
+<option>Aşık Veysel</option>
+<option>Tevfik Fikret</option>
+<option>Yunus Emre</option>
 </select>
 
 <button id="generateBtnTema">Metin Oluştur</button>
@@ -201,8 +265,14 @@ let eraData=""
 
 const authorsByEra={
   tanzimat:["Namık Kemal"],
-  servet:["Halit Ziya Uşaklıgil"],
-  cumhuriyet:["Ahmet Hamdi Tanpınar","Tarık Buğra"]
+  servet:["Halit Ziya Uşaklıgil", "Tevfik Fikret", "Ahmet Haşim"],
+  cumhuriyet:["Ahmet Hamdi Tanpınar","Tarık Buğra", "Sait Faik Abasıyanık", "Sabahattin Ali", "Peyami Safa"]
+  islamiyet_oncesi:[""]
+  halk_edebiyati:["Yunus Emre", "Aşık Veysel"]
+  divan:["Mevlana Celaleddin-i Rumi", "Nedim"]
+  milli_edebiyat:["Reşat Nuri Güntekin", "Faruk Nafız Çamlıbel"]
+  
+  
 }
 
 // SAYFA GEÇİŞ
