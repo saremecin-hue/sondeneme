@@ -400,6 +400,64 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
 })
+// BUTTONS (Bu kısmı tamamen bununla değiştir)
+document.addEventListener("DOMContentLoaded", async () => {
+
+  // 1. Önce verilerin sunucudan inmesini bekle
+  try {
+      await loadData();
+      console.log("Veriler başarıyla yüklendi:", styleData);
+  } catch (e) {
+      console.error("Veri yükleme hatası (Dosyalar bulunamadı veya JSON hatalı):", e);
+  }
+
+  // 2. Veriler yüklendikten sonra listeleri ilk kez doldur
+  updateAuthors(1);
+  updateAuthors(2);
+
+  // 3. Dönemine Göre Metin Oluştur
+  document.getElementById("generateBtn").onclick = () => {
+    const y1 = document.getElementById("yazar1").value;
+    const y2 = document.getElementById("yazar2").value;
+    const box = document.querySelector("#donem .result p");
+    
+    if(!styleData[y1] || !styleData[y2]) {
+      box.innerText = "Hata: Seçilen yazarın üslup verisi JSON dosyasında bulunamadı.";
+      return;
+    }
+    generate(`${y1} ve ${y2} bir edebiyat tartışması yapsın.`, y1, y2, box);
+  };
+
+  // 4. Yazarına Göre Karşılaştır
+  document.getElementById("generateBtnYazar").onclick = () => {
+    const y1 = document.getElementById("yazarA").value;
+    const y2 = document.getElementById("yazarB").value;
+    const box = document.querySelector("#yazar .result p");
+    
+    if(!styleData[y1] || !styleData[y2]) {
+      box.innerText = "Hata: Yazar verisi eksik.";
+      return;
+    }
+    generate(`${y1} ve ${y2} yazarlarını edebi açıdan karşılaştır.`, y1, y2, box);
+  };
+
+  // 5. Temasına Göre Konuştur
+  document.getElementById("generateBtnTema").onclick = () => {
+    const y1 = document.getElementById("yazarT1").value;
+    const y2 = document.getElementById("yazarT2").value;
+    const temaSec = document.getElementById("temaSec");
+    const temaMetni = temaSec.options[temaSec.selectedIndex].text; // "Aşk ve Sevgi" gibi düz metni alır
+    const box = document.querySelector("#tema .result p");
+    
+    if(!styleData[y1] || !styleData[y2]) {
+      box.innerText = "Hata: Yazar verisi bulunamadı.";
+      return;
+    }
+    generate(`${y1} ve ${y2}, ${temaMetni} teması üzerine kendi üsluplarıyla konuşsunlar.`, y1, y2, box);
+  };
+
+});
+
 
 </script>
 
