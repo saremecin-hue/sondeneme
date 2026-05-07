@@ -325,6 +325,10 @@ async function generate(prompt,y1,y2,box){
   console.log("Y2:", y2)
   console.log("DATA1:", styleData[y1])
   console.log("DATA2:", styleData[y2])
+  if(!styleData[y1] || !styleData[y2]){
+  box.innerText = "Yazar verisi bulunamadı";
+  return;
+}
   try {
     const res = await fetch("/api/generate",{
       method:"POST",
