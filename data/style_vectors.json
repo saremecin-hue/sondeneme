@@ -160,6 +160,7 @@
         "action_index": 0.157
     },
     
+
     "Aşık Veysel": {
         "total_words": 1066,
         "avg_sentence_length": 16.92,
@@ -175,6 +176,70 @@
         "dialogue_ratio": 0.002,
         "rhetoric_score": 0.095,
         "action_index": 0.184
+    },
+    "Mevlana": {
+        "total_words": 1075,
+        "avg_sentence_length": 9.11,
+        "long_sentence_ratio": 0.008,
+        "verb_ratio": 0.202,
+        "adj_ratio": 0.127,
+        "pron_ratio": 0.031,
+        "archaic_ratio": 0.007,
+        "nature_ratio": 0.007,
+        "social_ratio": 0.0,
+        "psych_ratio": 0.007,
+        "religious_ratio": 0.001,
+        "dialogue_ratio": 0.0,
+        "rhetoric_score": 0.127,
+        "action_index": 0.2
+    },
+    "Nedim": {
+        "total_words": 1181,
+        "avg_sentence_length": 45.42,
+        "long_sentence_ratio": 0.192,
+        "verb_ratio": 0.154,
+        "adj_ratio": 0.106,
+        "pron_ratio": 0.013,
+        "archaic_ratio": 0.01,
+        "nature_ratio": 0.001,
+        "social_ratio": 0.006,
+        "psych_ratio": 0.0,
+        "religious_ratio": 0.004,
+        "dialogue_ratio": 0.002,
+        "rhetoric_score": 0.0,
+        "action_index": 0.124
+    },
+    "Tevfik Fikret": {
+        "total_words": 5852,
+        "avg_sentence_length": 11.0,
+        "long_sentence_ratio": 0.111,
+        "verb_ratio": 0.146,
+        "adj_ratio": 0.177,
+        "pron_ratio": 0.018,
+        "archaic_ratio": 0.004,
+        "nature_ratio": 0.005,
+        "social_ratio": 0.004,
+        "psych_ratio": 0.004,
+        "religious_ratio": 0.004,
+        "dialogue_ratio": 0.007,
+        "rhetoric_score": 0.385,
+        "action_index": 0.129
+    },
+    "Yunus Emre": {
+        "total_words": 5086,
+        "avg_sentence_length": 23.44,
+        "long_sentence_ratio": 0.212,
+        "verb_ratio": 0.108,
+        "adj_ratio": 0.072,
+        "pron_ratio": 0.008,
+        "archaic_ratio": 0.011,
+        "nature_ratio": 0.002,
+        "social_ratio": 0.004,
+        "psych_ratio": 0.001,
+        "religious_ratio": 0.003,
+        "dialogue_ratio": 0.0,
+        "rhetoric_score": 0.0,
+        "action_index": 0.085
     },
  
 }
